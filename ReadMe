@@ -1,0 +1,13 @@
+How to compute the MC truth : 
+
+-> keep loose-loose pairs and solve case with more than 1 probe per tag
+root -l root://eoscms//eos/cms/store/caf/user/gpetrucc/TnP/V5/tnpZ_MC53X_DYJets.root prepareTreeMC.cxx+
+
+-> remove the double pairs
+root -l /tmp/hbrun/tnpZ_intermediate.root cleanPairs.cxx+
+
+-> give the final efficiency : 
+root -l computeEffTruth.C
+
+
+
