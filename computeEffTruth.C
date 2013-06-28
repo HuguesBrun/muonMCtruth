@@ -6,10 +6,7 @@ TChain *chain = new TChain("tpTree/fitter_tree");
 computeEffTruth(){
 
     
-   // chain->Add("root://eoscms//eos/cms/store/caf/user/gpetrucc/TnP/V5/tnpZ_MC53X_DYJets.root");
-//chain->Add("/afs/cern.ch/work/h/hbrun/pogTnPr7SoupWithLooseBestZOnePairBiasNoRef/tnpZ_TreeNoBiasCleaned.root");
-  //  chain->Add("/afs/cern.ch/work/h/hbrun/pogTnPr8SoupWithTight/tnpZ_MC53X_DYJets.root");
-  //   chain->Add("/tmp/hbrun/tnpZ_withMuIDTop.root");
+
      chain->Add("/tmp/hbrun/tnpZ_theTreeCleaned.root");
     
     TString denominator = "(pt>20&&tag_pt>20&&abseta<2.4&&abs(tag_eta)<2.4&&mass>80&&mass<100&&mcTrue==1)";

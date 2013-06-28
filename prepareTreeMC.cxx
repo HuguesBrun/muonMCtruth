@@ -20,7 +20,7 @@ void prepareTreeMC() {
     tIn->SetBranchAddress("PF", &PF);
 	
 
-    TFile *fOut = new TFile("/tmp/hbrun/tnpZ_withMuIDTop.root", "RECREATE");
+    TFile *fOut = new TFile("/tmp/hbrun/tnpZ_intermediate.root", "RECREATE");
     fOut->mkdir("tpTree")->cd();
     TTree *tOut = tIn->CloneTree(0);
   
