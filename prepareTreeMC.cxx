@@ -39,8 +39,23 @@ void prepareTreeMC() {
             printf("Done %9d/%9d   %5.1f%%   (elapsed %5.1f min, remaining %5.1f min)\n", i, n, i*evDenom, totalTime, remaining); 
             fflush(stdout);
         }
-	if (pair_probeMultiplicity>1&&(!(pair_BestZ==1))) continue;	// if multiplicity more than 1, keep only the pair closest from the Z
-    
+        int nbPFmuon = 0;
+        int theRightPair = i; // the only pair with the 2 muons passing 
+        if (pair_probeMultiplicity>1) {            
+            int multi = (int) pair_probeMultiplicity;
+            for (int j=i+1 ; j<(i+multi) ; j++){
+                tIn->GetEntry(j);
+                if (PF) {
+                    nbPFmuon++;
+                    theRightPair=j;
+                }
+
+            }
+            if (nbPFmuon>1) continue; //should have only 1 probe passing PF per pair
+            i=i+multi-1;//go in the next pair
+            tIn->GetEntry(theRightPair); //with this we save the only pair with the probe passing the PF
+        }
+        
         bool passLoose = ((Glb||TM)&&PF);
         if (!(passLoose)) continue; //probe passing the loose ID (the tag is already passing it)
         tOut->Fill();
