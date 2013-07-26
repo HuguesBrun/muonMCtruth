@@ -43,7 +43,7 @@ void prepareTreeMC() {
         int theRightPair = i; // the only pair with the 2 muons passing 
         if (pair_probeMultiplicity>1) {            
             int multi = (int) pair_probeMultiplicity;
-            for (int j=i+1 ; j<(i+multi) ; j++){
+            for (int j=i ; j<(i+multi) ; j++){
                 tIn->GetEntry(j);
                 if (PF) {
                     nbPFmuon++;

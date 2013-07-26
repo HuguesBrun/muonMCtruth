@@ -22,6 +22,8 @@ computeEffTruth(){
     TH1F *massPassingMu17TkMu8 = new TH1F("massPassingMu17TkMu8","",40,60,120);
     chain->Draw("mass>>massPassingMu17TkMu8",denominator+"&&"+passMu17TkMu8);
 
+    cout << "num=" << massPassingMu17Mu8->Integral() << endl;
+    cout << "den=" << massDenominator->Integral() << endl;
     
 
     cout << "eff of Mu17Mu8 = " << 1.0*massPassingMu17Mu8->Integral()/massDenominator->Integral() << endl;
