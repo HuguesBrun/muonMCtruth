@@ -11,13 +11,16 @@
 void prepareTreeMC() {
 	using namespace std;
     TTree *tIn  = (TTree *) gFile->Get("tpTree/fitter_tree");
-    Float_t pair_probeMultiplicity;
+    Float_t pair_probeMultiplicity, tag_ChargedHadIso04, tag_l3pt, tag_pt;
     Int_t Glb, TM, PF, pair_BestZ;
     tIn->SetBranchAddress("pair_probeMultiplicity", &pair_probeMultiplicity);
     tIn->SetBranchAddress("pair_BestZ", &pair_BestZ);
     tIn->SetBranchAddress("Glb", &Glb);
     tIn->SetBranchAddress("TM", &TM);
     tIn->SetBranchAddress("PF", &PF);
+    tIn->SetBranchAddress("tag_ChargedHadIso04", &tag_ChargedHadIso04);
+    tIn->SetBranchAddress("tag_l3pt", &tag_l3pt);
+    tIn->SetBranchAddress("tag_pt", &tag_pt);
 	
 
     TFile *fOut = new TFile("/tmp/hbrun/tnpZ_intermediate.root", "RECREATE");
@@ -41,6 +44,10 @@ void prepareTreeMC() {
         }
 	if (pair_probeMultiplicity>1&&(!(pair_BestZ==1))) continue;	// if multiplicity more than 1, keep only the pair closest from the Z
     
+       // printf("chargedIso=%f, L3=%f\n", tag_ChargedHadIso04, tag_l3pt);
+        
+        
+        if (!((tag_ChargedHadIso04/tag_pt<0.2)&&(tag_l3pt>0))) continue;
         bool passLoose = ((Glb||TM)&&PF);
         if (!(passLoose)) continue; //probe passing the loose ID (the tag is already passing it)
         tOut->Fill();
